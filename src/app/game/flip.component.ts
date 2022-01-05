@@ -6,7 +6,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   selector: 'app-card',
   template: `
   <div class="material-box box-square">
-	<div class="box-flipper" [@flipState]="flip">
+	<div class="box-flipper" [@flipState]="flipped? 'back':'front'">
 		<img class="box-side box-front box-img" src='{{frontUrl}}' />
 		<img class="box-side box-back box-img"src='{{backUrl}}' />
 	</div>
@@ -82,21 +82,21 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ],
   animations: [
     trigger('flipState', [
-      state('active', style({
+      state('back', style({
         transform: 'rotateY(179deg)'
       })),
-      state('inactive', style({
+      state('front', style({
         transform: 'rotateY(0)'
       })),
-      transition('active => inactive', animate('500ms ease-out')),
-      transition('inactive => active', animate('500ms ease-in'))
+      transition('front => back', animate('500ms ease-out')),
+      transition('back => front', animate('500ms ease-in'))
     ])
   ]
 })
 export class FlipComponent {
     @Input() public frontUrl: string;
     @Input() public backUrl: string;
-    @Input() public flip: string ='inactive';
+    @Input() public flipped: boolean =false;
   constructor() { }
 
 

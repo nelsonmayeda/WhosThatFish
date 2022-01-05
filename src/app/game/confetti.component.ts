@@ -10,14 +10,14 @@ import * as confetti from 'canvas-confetti';
 })
 export class ConfettiComponent {
     @ViewChild('myCanvas') myCanvas
-    private _flip: string ='inactive';
+    private _flipped: boolean =false;
     @Input() 
-    get flip(): string { return this._flip; }
-    set flip(flip: string) {
-      if(flip =='active'){
+    get flipped(): boolean { return this._flipped; }
+    set flipped(flipped: boolean) {
+      if(flipped){
         this.surprise();
       }
-      this._flip = flip;
+      this._flipped = flipped;
     }
     constructor() {}
     
